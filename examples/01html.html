@@ -15,11 +15,36 @@
          console.log('            |   |','<br>');
          console.log('        +---+---+','<br>');
          console.log('        |   |   |','<br>');
-         console.log('    +---+---+---+      /\___/\      -----    ','<br>');
-         console.log('    |   |   |   |     ( ‘   ’ )   / Hello  \ ','<br>');
+         console.log('    +---+---+---+      /\\___/\\      -----    ','<br>');
+         console.log('    |   |   |   |     ( ‘   ’ )   / Hello  \\ ','<br>');
          console.log('+---+---+---+---+     (   -   )  <  Junior  |','<br>');
-         console.log('|   |   |   |   |      |  |  |    \ Coder! / ','<br>');
+         console.log('|   |   |   |   |      |  |  |    \\ Coder! / ','<br>');
          console.log('+---+---+---+---+     (___|___)     -----    ','<br>');
+        </script>
+        <script>
+            let soju = 3000;
+            let sj_qty = 2;
+            let chicken = 12000;
+            let ck_qty = 1;
+            let money = 50000;
+            let money1 = prompt('내신금액');
+            let tot = (soju*sj_qty) + chicken
+            let tex = tot / 10
+
+            console.log(`[ 음식나라 ]`,`<br>`)
+            console.log(`----------------------------------`,`<br>`);
+            console.log(`소주    ${sj_qty}                   ${soju*sj_qty}`,`<br>`);
+            console.log(`너나치킨 ${ck_qty}                  ${chicken}`,`<br>`);
+            console.log(`----------------------------------`,`<br>`);
+            console.log(`과세합계                    ${tot-tex}`,`<br>`);
+            console.log(`부가세                       ${tex}`,`<br>`);
+            console.log(`----------------------------------`,`<br>`);
+            console.log(`총합계                      ${tot}`,`<br>`);
+            console.log(`받은금액                    ${money1}`,`<br>`);
+            console.log(`잔돈                        ${money1-tot}`,`<br>`);
+            console.log(`----------------------------------`,`<br>`);
+            console.log(`    2014.  07.  07    14 : 35 : 24`,`<br>`);
+
         </script>
 </body>
 </html>
