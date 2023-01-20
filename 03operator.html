@@ -57,6 +57,90 @@
     <p>복합 할당연산자 : 할당 연산자와 산술 연산자를 혼합해서
       표현식을 간단하게 작성하는데 사용</p>
 
+    <script>
+        x = 1;
+        x = x + 1;
+        document.write(`x = x + 1 : `, x ,`<br>`);
+
+        x = 1;         //syntactic sugar 프로그래밍 코드를 더 편하게 도와주는 문법
+        x += 1;        //더 간결하고, 명확한 표현이 가능
+        document.write(`x = x + 1 : `, x ,`<br>`);
+    </script>
+
+    <h2>비교연산자</h2>
+    <p>좌항과 우항의 피연산자를 비교해서
+        큰지 작은지 같은지 알아보는 연산자</p>
+    <p>결과값은 true나 false로 반환</p>
+
+    <script>
+        x = 10;
+        y = 5;
+
+        document.write(`10 > 5 : `, x>y, `<br>`);
+        document.write(`10 == 5 : `, x==y, `<br>`);   //값의 동일여부 비교
+        document.write(`10 === 5 : `, x===y, `<br>`); //값, 타입 동일여부 비교
+
+        y = 10;
+        document.write(`10 == 10 : `, x==y, `<br>`);
+        document.write(`10 === 10 : `, x===y, `<br>`);
+
+        y = 10n;
+        document.write(`10 == 10n : `, x==y, `<br>`);
+        document.write(`10 === 10n : `, x===y, `<br>`);
+
+        y = '10';
+        document.write(`10 == '10' : `, x==y, `<br>`);  //자바스크립트에서 == 연산자로 비교시
+        document.write(`10 === '10' : `, x===y, `<br>`); //변수의 자료형을 일치시키는 암묵적 형변환
+        // 비교연산자는 경우에 따라 수많은 부작용 양산 되도록이면 === 을 쓰는걸 추천
+
+    </script>
+
+    <h3>삼항연산자</h3>
+    <p>if ~ else 의 syntactic sugar</p>
+    <p>변수 = 조건식 ? 참일때의 값 : 거짓일때의 값</p>
+
+    <script>
+        //평균 점수가 60점이상이면 '합격', 아니면 '불합격'이라 출력
+        let jumsu = 59.9;
+        // 가독성을 위해 조건식에는 괄호를 쓰는것이 좋다
+        let result = (jumsu >= 60) ? `합격` : `불합격`;
+        document.write(`평균점수가 ${jumsu}라면 결과는 ${result} 입니다<br>`);
+    </script>
+
+    <h2>논리연산자</h2>
+    <p>boolean 표현식에 대한  논리합OR(||) 또는
+        논리곱AND(&&) 또는 부정NOT(!) 연산을 수행하는 기호</p>
+
+    <script>
+        document.write(`true or false : `, true || false , `<br>`);
+        document.write(`true and false  : `, true && false , `<br>`);
+        document.write(`1true and 0false  : `, 1&&0 , `<br>`);
+    </script>
+
+    <script>
+        // FF - F, FT - T, TF - T, TT - T
+        // val = val1 || val2 || val3 의 경우
+        // 연산자 OR는 첫번째 truthy를 출력함 - short circuit evaluate
+        document.write(`1 || 0 : `, 1||0 , `<br>`);
+        document.write(`null || 1 : `, null||1 , `<br>`);
+        document.write(`undefined || 1 : `, undefined||1 , `<br>`);
+        document.write(`undefined || 1 ||null : `, undefined||1||null , `<br>`);
+
+        // FF - F, FT - F, TF - F, TT - T
+        // val = val1 && val2 && val3 의 경우
+        // 연산자 AND는 첫번째 falsy를 출력함
+        //한개만 써도 출력이 되지만 적용되는 방식이 달라짐
+        document.write(`1 && 0 : `, 1&&0 , `<br>`);
+        document.write(`null && 1 : `, null&&1 , `<br>`);
+        document.write(`undefined && 1 : `, undefined&&1 , `<br>`);
+        document.write(`undefined && 1 && null : `, undefined&&1&&null , `<br>`);
+        document.write(`null && 1 && 2 : `, null&&1&&2, `<br>`);
+    </script>
+    <script>
+        document.write(`undefined | 1 |null : `, undefined|1|null , `<br>`);
+        document.write(`undefined & 1 & null : `, undefined&1&null , `<br>`);
+    </script>
+    <p></p>
     <p></p>
     <p></p>
     <p></p>
