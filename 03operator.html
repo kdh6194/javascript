@@ -9,6 +9,7 @@
     <h2>표현식</h2>
     <p>표현식expression :
       리터럴(값), 식별자(변수), 연산자, 함수 호출등의 조합을 의미</p>
+
     <p>표현식은 평가evaluate(표현식이 실행되어 결과값 생성)되어
       하나의 값을 만듦</p>
 
@@ -22,9 +23,12 @@
     <h2>연산자</h2>
     <p>하나 이상의 표현식을 대상으로 산술,할당,비교,논리,타입 연산을
       수행해서 하나의 값을 만드는 기호를 의미</p>
+
     <p>할당 연산자 : 오른쪽 피연산자를
       왼쪽 피연산자에 대입하는 기호, 보통 '='를 의미</p>
+
     <p>산술 연산자 : 덧셈,뺄셈,곱셈,나눗셈 연산을 수행하는 기호.</p>
+
     <p>그외에도 나머지 연산자(%), 증감/감소 연산자(++,--),
       거듭제곱(**)등이 있음</p>
 
@@ -140,10 +144,60 @@
         document.write(`undefined | 1 |null : `, undefined|1|null , `<br>`);
         document.write(`undefined & 1 & null : `, undefined&1&null , `<br>`);
     </script>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
+
+    <h2>변수의 자료형 알아보기</h2>
+    <p>typeof 연산자를 이용하면 변수나 값의 자료형을 출력함</p>
+
+    <script>
+        document.write(`숫자 10의 자료형 : `,typeof (10),'<br>');
+        document.write(`문자 abc의 자료형 : `,typeof ('abc'),'<br>');
+        document.write(`숫자 10n의 자료형 : `,typeof (10n),'<br>');
+        document.write(`undefined의 자료형 : `,typeof (undefined),'<br>');
+    </script>
+
+    <h2>자료형 변환</h2>
+    <p>함수와 연산자에 전달되는 값은 표현식에
+        적합한 자료형으로 변환됨(묵시적 형변환)</p>
+
+    <p>하지만, 상황에 따라 의도를 갖고 원하는 자료형으로
+        직접 변환해야 하는 경우도 있음 (명시적 형변환)</p>
+    <p>어떤 값을 숫자형으로 변환하고 싶다면 number() 사용</p>
+    <p>어떤 값을 문자형으로 변환하고 싶다면 string() 사용</p>
+    <p>어떤 값을 불리언형으로 변환하고 싶다면 boolean() 사용</p>
+
+    <script>
+        //나이 계산 v1 : 현재년도 - 생년년도
+        let birthyear = prompt(`생년년도는?`);
+        let age = 2023 - birthyear
+
+        document.write(`생년년도 : `, birthyear, '<br>');
+        document.write(`당신의 나이 : `, age, '<br>');
+    </script>
+
+    <script>
+        //ex) 성적 처리프로그램 v2
+        //이름, 국어, 영어, 수학을 입력받아
+        //총점, 평균, 학점을 계산한 뒤 결과 출력
+        //단, 학점은 수우미양가 중 하나가 출력되어야 함
+        let inform = prompt(`이름`);
+        let inform1 = prompt('국어점수');
+        let inform2 = prompt('영어점수');
+        let inform3 = prompt('수학점수');
+        let tot = Number(inform1) + Number(inform2) + Number(inform3);
+        let averge = tot/3;
+        let grade = (averge < 60) ? '가' : (averge < 70 ) ? '양' : (averge < 80) ? '미' : (averge < 90) ? '우' : '수' ;
+        let grade1 = (averge>=90) ? '수' : (averge>=80) ? '우' : (averge>=70) ?'미' :(averge>=60) ? '양': '가';
+        //prompt에서 입력받은 값들은 문자형으로 출력됨
+        //Number의경우 Number(prompt('출력문구'))사용이 가능함
+        document.write(`<h1>성적처리 v2</h1>`);
+        document.write(`이름 : ${inform}`,`<br>`)
+        document.write(`국어 : ${inform1}`,`<br>`)
+        document.write(`영어 : ${inform2}`,`<br>`)
+        document.write(`수학 : ${inform3}`,`<br>`)
+        document.write(`총점 : ${tot}`,`<br>`)
+        document.write(`평균 : ${averge}`,`<br>`)
+        document.write(`학점 : ${grade}`,`<br>`)
+        document.write(`학점1 : ${grade1}`,`<br>`)
+    </script>
 </body>
 </html>
