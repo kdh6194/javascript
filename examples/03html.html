@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <h2>시간단위 계산</h2>
+      <script>
+          let daysec = 86400;
+          let hoursec = 3600;
+          let minsec = 60;
+
+          date = 1234567890;
+          date1 = 98765;
+          date2 = 12345;
+
+          let result = `${date}초는 ${parseInt(date / daysec)}개월<br>`;
+                result += `${date1}초는 ${parseInt(date1 / hoursec)}시<br>`;
+                result += `${date2}초는 ${parseInt(date2 / minsec)}분<br>`;
+
+          document.write(result);
+      </script>
+        <h2>도서 정보출력 v1</h2>
+        <script>
+             let bkname = `누구나 알기쉬운 자바: 입문편`;
+             let author = '카와바 타케시';
+             let writer = '하진일';
+             let pub = '혜지원';
+             let pubdate = '2014년 06월';
+             let price = 25000;
+             let dis = 10;
+             let sale =price*(1-(dis/100));
+             let maileage =sale * (dis/100);
+
+             let result2 = `책이름 : ${bkname}<br>`;
+             result2 += `저자 : ${author}<br>`;
+             result2 += `역자 : ${writer}<br>`;
+             result2 += `출판사 : ${pub}<br>`;
+             result2 += `출간일 : ${pubdate}<br>`;
+             result2 += `정가 : ${price}원<br>`;
+             result2 += `할인율 : ${dis}%<br>`;
+             result2 += `할인금 : ${sale}원<br>`;
+             result2 += `적립금 : ${maileage}원<br>`;
+
+             document.write(result2);
+
+        </script>
+        <h2>환전하기</h2>
+        <script>
+            let money = prompt('지불금액은?');
+            let price2 = prompt('판매금액은?');
+            let charge1 = money - price2;
+
+            let count = (charge1>=10) ? charge1 / 10 : '금액 교환이 어렵습니다';
+            let count1 =(charge1>=50) ? charge1 / 50 : '바꿀 금액이 해당되지 않습니다';
+            let count2 =(charge1>=100) ? charge1 / 100 : '바꿀 금액이 해당되지 않습니다';
+            let count3 =(charge1>=500) ? charge1 / 500 : '바꿀 금액이 해당되지 않습니다';
+            let count4 =(charge1>=1000) ? charge1 / 1000 : '바꿀 금액이 해당되지 않습니다';
+            let count5 =(charge1>=5000) ? charge1 / 5000 : '바꿀 금액이 해당되지 않습니다';
+            let count6 =(charge1>=10000) ? charge1 / 10000 : '바꿀 금액이 해당되지 않습니다';
+            let count7 =(charge1>=50000) ? charge1 / 50000 : '바꿀 금액이 해당되지 않습니다';
+
+            let result1 = `지불하신 금액${money}을 판매금액${price}에서 제외하고 남은잔돈은<br>`
+                result1 += `잔돈은 ${money}이고 10원 : ${parseInt(count)} 개<br>`;
+             result1 += `잔돈은 ${money}이고 50원 : ${parseInt(count1)} 개<br>`;
+             result1 += `잔돈은 ${money}이고 100원 : ${parseInt(count2)} 개<br>`;
+             result1 += `잔돈은 ${money}이고 500원 : ${parseInt(count3)} 개<br>`;
+             result1 += `잔돈은 ${money}이고 1000원 : ${parseInt(count4)} 장<br>`;
+             result1 += `잔돈은 ${money}이고 5000원 : ${parseInt(count5)} 장<br>`;
+             result1 += `잔돈은 ${money}이고 10000원 : ${parseInt(count6)} 장<br>`;
+             result1 += `잔돈은 ${money}이고 50000원 : ${parseInt(count7)} 장<br>`;
+            document.write(result1);
+        </script>
+        <h2>잔돈바꾸기</h2>
+        <script>
+            let money1 = prompt('지불금액은?');
+            let price1 = prompt('판매금액은?');
+            let charge = money1 - price1;
+
+            let w50k = 0;
+            let w10k = 0;
+            let w5k = 0;
+            let w1k = 0;
+            let w500 = 0;
+            let w100 = 0;
+            let w50 = 0;
+            let w10 = 0;
+
+            w50k = parseInt(charge/50000);
+            charge = charge % 50000;
+            w10k = parseInt(charge/10000);
+            charge = charge % 10000;
+            w5k = parseInt(charge/5000);
+            charge = charge % 5000;
+            w1k = parseInt(charge/1000);
+            charge = charge % 1000;
+            w500 = parseInt(charge/500);
+            charge = charge % 500;
+            w100 = parseInt(charge/100);
+            charge = charge % 100;
+            w50 = parseInt(charge/50);
+            charge = charge % 50;
+            w10 = parseInt(charge/10);
+            charge = charge % 10;
+
+            let result3 = `50000원 : ${w50k}장<br>`;
+                result3 += `10000원 : ${w10k}장<br>`;
+                result3 += `5000원 : ${w5k}장<br>`;
+                result3 += `1000원 : ${w1k}장<br>`;
+                result3 += `500원 : ${w500}개<br>`;
+                result3 += `100원 : ${w100}개<br>`;
+                result3 += `50원 : ${w50}개<br>`;
+                result3 += `10원 : ${w10}개<br>`;
+            document.write(result3);
+        </script>
+</body>
+</html>

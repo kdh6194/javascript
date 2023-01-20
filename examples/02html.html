@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+      document.write(`27 / 13 + 4 = `,(27/13)+4,'<br>');
+      document.write(`27 / 13 + 4.0 = `,(27/13)+4.0,'<br>');
+      document.write(`42.7 % 3 + 18 = `,(42.7%3)+18,'<br>');
+      document.write(`(3 < 4) && 5 / 8 = `,(3<4)&&5/8,'<br>');
+      document.write(`23 / 5 + 23 / 5.0 = `,(23/5)+(23/5.0),'<br>');
+      document.write(`2.0 + 'a' = `,2.0+'a','<br>');
+      document.write(`2 + 'a' = `,2+'a','<br>');
+      document.write(`'a' + 'b' = `,'a'+'b','<br>');
+      document.write(`'a' / 'b' = `,'a'/'b','<br>');
+      document.write(`'a' && ! 'b' = `,'a'&&!'b','<br>');
+      document.write(`(double) 'a' / 'b' = `, 'a'/'b','<br>');
+    </script>
+    <!--<h2>이름,몸무게,나이 출력하기</h2>
+    <script>
+        let name = prompt('이름은?');
+        let age = prompt('나이는?');
+        let wei = prompt('몸무게는?');
+        let result = `이름은${name} <br>`
+            result += `나이는${age}살 <br>`
+            result += `몸무게는${wei}Kg <br>`
+
+        document.write(result);
+        //document.write(`이름은${name}이며 나이는${age}살이고 몸무게는${wei}Kg입니다`,'<br>')
+
+    </script>-->
+    <h2>생년월일로 나이출력하기</h2>
+    <script>
+      let byear = prompt(`생년?`);
+      let bmonth = prompt(`생월?`);
+      let bday= prompt(`생일?`);
+
+      let year = 2023;
+      let month = 1;
+      let day = 20;
+
+      let ispassed = false;
+        // 처리
+      age = year - byear;
+      age = (month >= bmonth&&day >= bday) ? age +1 : age;
+
+      let result1 = `현재년월일 : ${year}년 ${month}월 ${day}일 <br>`;
+         result1 += `생년월일 :${byear}년 ${bmonth}월 ${bday}일 <br>`;
+         result1 += `나이 : ${age} <br>`;
+
+      document.write(result1);
+    </script>
+    <h2>구구단 출력하기</h2>
+    <!--<script>
+          let a = prompt('구구단을 물어봐');
+          let result2 = `${a} X 1 는 ${a *1} <br>`;
+                result2 += `${a} X 2 는 ${a *2} <br>`;
+                result2 += `${a} X 3 는 ${a *3} <br>`;
+                result2 += `${a} X 4 는 ${a *4} <br>`;
+                result2 += `${a} X 5 는 ${a *5} <br>`;
+                result2 += `${a} X 6 는 ${a *6} <br>`;
+                result2 += `${a} X 7 는 ${a *7} <br>`;
+                result2 += `${a} X 8 는 ${a *8} <br>`;
+                result2 += `${a} X 9 는 ${a *9} <br>`;
+
+          document.write(result2);
+    </script>-->
+</body>
+</html>
