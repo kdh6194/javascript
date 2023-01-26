@@ -248,7 +248,7 @@
       //4,6,9,11 - 30일
       //2 - 윤년여부에 따라 28 or 29 일
 
-      <!--month = 2;
+      /*month = 2;
       year = 'N';
       let lastDay= 0;
 
@@ -268,9 +268,9 @@
                 else {lastDay = 28}; break
         default: lastDay = '잘못 입력하셨습니다'; break
       }
-      document.write(`${month}월이면 `,lastDay,`<br>`);-->
+      document.write(`${month}월이면 `,lastDay,`<br>`);*/
 
-      now = 1;
+      now = 6;
       year = 'N';
       result= '';
 
@@ -321,5 +321,10 @@
     <p>하지만, switch문은 평가식의 결과값을 판단하고,
       해당하는 case절로 바로 찾아가기 때문에 if문보다 효율이 좋음</p>
     <p></p>
+
+    <script>
+      now = new Date(2023,1,0);
+      document.write(now.getDate(),'<br>');
+    </script>
 </body>
 </html>
