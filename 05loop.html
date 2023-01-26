@@ -53,11 +53,110 @@
 
       for(let i = 10; i>=1; i-- ){
         document.write(i,'  ')
-      }
+      } document.write('<br>')
     </script>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
+
+    <script>
+        let arr= [1,2,3,4,5,6];
+
+        for (let i = arr.length; i>=1; i--){
+            document.write(i,'<br>')
+        }
+        //for문 밖에서 변수를 지정하고
+        //for문안에 집어넣어서 사용가능
+        let dan = 6;
+        for(let i = 1; i <10; ++i){
+            document.write(`${dan} * ${i} = ${dan * i}`,' ','<br>')
+        }
+    </script>
+
+    <h2>무한 반복문 - for</h2>
+    <p>for문의 경우 초기식, 판별식, 증감식을 비워두면
+        반복을 끊임없이 실행하는 무한반복문이 됨</p>
+    <p>무한 루프가 되면 웹 브라우져에서 실행이 안됨
+        최대한 무한루프를 쓸때 주의해야함
+        (cpu사용률이 급격한 증가가 이루어짐)</p>
+    <script>
+        /*
+        for( ; ; ){
+            document.write(`Hello, World!! <br>`)
+        }
+        */
+    </script>
+
+    <h2>중첩반복문 - for</h2>
+    <p>2개 이상의 for문을 겹쳐 사용하는 반복문</p>
+    <p>복잡한 작업을 반복 실행할때 유용하게 사용</p>
+
+    <script>
+        //코드를 짜고 나서 추적을하고 싶으면 디버그를 사용해라
+        for (let i = 0; i<11; ++i){ //층을 반복
+            for(let j = 0; j < i; ++j ) { //별을 출력 반복
+                document.write(`*`);
+            }
+            document.write('<br>')
+        }
+        //10층 짜리 별역피라미드
+        for(let i = 1; i <= 10; ++i){
+            for(let j=10; j >=i; --j){
+                document.write(`*`);
+            }
+            document.write('<br>')
+        }
+        //구구단 전체 출력
+        for (let i = 1; i < 10; ++i){
+            for(let j = 2; j < 10; ++j){
+                document.write(`${j} * ${i} = ${j * i}`);
+                document.write(`&nbsp;&nbsp;&nbsp;&nbsp;`);
+            }
+            document.write('<br>')
+        } document.write('<br>')
+
+        for (let i = 2; i < 10; ++i){
+            for(let j = 1; j < 10; ++j){
+                document.write(`${i} * ${j} = ${i * j}<br>`);
+            }
+            document.write('<br>')
+        }
+    </script>
+
+    <h2>break</h2>
+    <p>원하는 시점에 반복문이나 코드블록에서
+        벗어나기 위해 사용</p>
+
+    <script>
+        //1~1000까지의 총합을 계산
+        //단, 총합이 10000을 넘으면 계산을 중단
+        total = 0;
+        for (let i = 1; i <= 1000; i++){
+            total += i;
+            if (total >= 10000) {break;}
+        }document.write(total,'<br>')
+
+        total = 0;
+        let i = 1;  //초기식을 전역변수 선언(별로 안좋음)
+        for (; i <= 1000; ++i){
+            if (total >= 10000) {break;}
+            total += i;
+        }document.write(i+' '+total,'<br>')
+    </script>
+
+    <h2>continue</h2>
+    <p>반복문의 코드 실행을 현 지점에서 중단하고
+        반복문의 증감식이나 조건식으로 제어를 이동시킴</p>
+    <p>즉, 반복을 일시적으로 건너뛰어 다음 반복으로 넘어감</p>
+
+    <script>
+        /* 1~1000까지의 총합 계산
+        단, 5의 배수나 7의 배수는 계산에서 제외
+         */
+        total = 0;
+        for (let i = 1; i <= 1000; i++){
+            total += i;
+            if (i%5 == 0 || i%7== 0 ) {continue;}
+            document.write(i,' ')
+        }document.write(total,'<br>')
+    </script>
+
 </body>
 </html>
