@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>javascript 반복문</title>
+</head>
+<body>
+    <h1>javascript 반복문</h1>
+    <h2>while</h2>
+    <p>조건식이 참일 동안 코드블록을 실행하는 반복문</p>
+    <p>만일, 조건식이 처음부터 거짓이면
+      코드블록은 한번도 실행되지 않을 수 있음</p>
+    <p>for는 반복실행 횟수를 처음부터 알고 있을때 실행하는 반복문인 반면,
+      while은 반복 횟수를 모르고 실행하는 반복문임</p>
+    <p>하지만, for문을 while문으로 또는 while문을 for문으로 변환이 가능</p>
+    <h2>while 구조</h2>
+    <p>초기식</p>
+    <p>while문(조건식) { </p>
+    <p>     실행할 코드들</p>
+    <p>           증감식</p>
+    <p> } </p>
+
+    <script>
+      //1~10까지의 정수 출력
+      let i = 0;
+      while(i < 10) {
+        i++;
+        document.write(i,' ');
+      }document.write('<br>');
+
+      //1~100까지 짝수 출력
+      let j = 0;
+      while( j <100){
+        j++;
+        if (j%2 === 0) {
+          document.write(j,' ');}
+      }document.write('<br>');
+      //1~100까지의 총합 출력
+      let total = 0;
+      let a = 0;
+      while(a <100){ a++; total += a;
+      } document.write(total,'<br>');
+      //10~1까지 정수 출력
+      let b = 11;
+      while( b>=2){ --b;
+        document.write(b,'  ')
+      } document.write('<br>')
+      //지역변수로 지정하면 중복 변수명이 되어 변수명을 새로 지정해야한다
+      let output = '';
+      for (let i = 0; i<11; i++){
+        for(let j = 0; j < i; j++ ) {
+          output += `*`;
+          document.write(`${output}<br>`)
+        }
+      }document.write('<br>')
+    </script>
+    <h2>무한 반복문 - while</h2>
+    <p>반복문의 조건식을 true라고 설정하면
+      해당 반복문을 무한 실행함</p>
+
+    <script>
+      //임의의 정수를 계속 입력하면
+      //입력한 정수의 합을 계산함
+      //단, 0을 입력하면 실행을 중지하고
+      //지금까지의 총합을 출력
+      //옵션 : 입력한 모든 정수도 같이 화면에 출력
+      int = [];
+      tot = 0;
+      i = 0;
+      while (true) {
+        int.push(parseInt(prompt('숫자기입')));
+          tot += i;
+          if (int[i] === 0 ) {break;}
+          i++;
+          document.write(int,' / ',tot,'<br>')
+      }document.write('<br>')
+      //while (int.length >= 0)이거 대신 while (true)
+      sum =0;
+      num =[];
+      while(true) {
+        let num = parseInt(prompt('숫자'))
+        num
+      }
+    </script>
+
+    <p></p>
+    <p></p>
+</body>
+</html>
