@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>javascript scope</title>
+</head>
+<body>
+    <h1>자바스크립트 scope</h1>
+    <h2>개요</h2>
+    <p>변수가 사용될 수 있는 범위를 scope라고 함</p>
+    <p>global scope : 선언된 변수는 어느 곳에서 든지 접근 가능</p>
+    <p>local scope : 선언된 변수는 선언된 영역에서만 접근 가능</p>
+    <p>function scope : 함수 안에서 선언된 변수는 함수 안에서만 접근 가능</p>
+
+    <script>
+      let a = '123'; //전역 scope
+
+      {//코드블록
+        document.write(a,'<br>');
+      }
+
+      {
+        document.write(a,'<br>');
+      }
+
+      let b = () => document.write(a,'<br>');
+      b();
+    </script>
+
+    <script>
+      {
+        var c = '456';
+        document.write(c,'<br>');
+      }
+
+      {
+        document.write(c,'<br>');
+      }
+    </script>
+
+    <script>
+      {
+        let d = '789';  // local scope
+        document.write(d,'<br>');
+      }
+      {
+        //d변수는 지역 scope으로 선언했기 때문에
+        //이 블록에서는 호출 불가
+        //document.write(d,'<br>');
+      }
+    </script>
+
+    <h2>호이스팅</h2>
+    <p>변수나 함수를 어디서 어떻게 선언하더라도
+      항상 컨텍스트내 최상위로 끌고 올라온 뒤
+      undefined를 할당해두고 코드를 실행하는 것</p>
+    <p>var로 선언한 변수나 선언형 함수를 사용하는 경우 발생함</p>
+    <p>따라서, 변수 선언시 let을 사용하고
+      화살표함수 선언을 이요하면 이러한 문제를 막을 수 있다</p>
+    <script>
+      // var e = undefined; -->암묵적 전역
+      {
+        var e = '321';  // local scope
+        document.write(e,'<br>');
+      }
+      {
+        //호이스팅hoisting
+        document.write(e,'<br>');
+      }
+    </script>
+
+    <script>
+      let f = 1;
+      let g = 2;
+      {
+        let f = 3;
+        {
+          //document.write(f,'<br>'); -> 선언 전에 호출해서 에러발생
+          let f = 4;
+          document.write(f,'<br>');
+          document.write(g,'<br>');
+        }
+        document.write(f,'<br>');
+        document.write(g,'<br>');
+      }
+    </script>
+
+    <script>
+        function sayHello() {
+          document.write('Hello, World!!<br>');
+        }
+        sayHello();
+    </script>
+
+    <script>
+      sayHello2();
+      function sayHello2() {
+        document.write('Hello, hoisting!!<br>');
+      }
+      //호이스트 때문에 var 변수명 또는 함수명이 먼저 지정되면
+      // 디버깅시 헷갈릴 수 있는 경우가 많아짐
+      //그래서  var 이나 선언형 함수는 구시대 유물
+    </script>
+
+    <script>
+
+      // sayHello3(); -> let 변수명을 사용하니 콘솔에서 오류로 잡힘
+      let sayHello3 = () => {
+        document.write('Hello, rayman!!<br>');
+      }
+      sayHello3();
+      </script>
+
+    <p></p>
+</body>
+</html>
