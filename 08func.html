@@ -47,52 +47,58 @@
     <script>
         //년도를 입력하면 윤년여부를 계산해서 출력
         //윤년여부를 계산하는 함수 : computLeapYear
-        function computLeapYear(msg){
-            let year = msg;
-            let result1 = `<strong>${year}는 평년 입니다<br>`;
+        function computLeapYear(year){
+            let result1 = `평년 입니다<br>`;
 
-            if (year%4 === 0){document.write(`<strong>${year}는 윤년입니다</strong><br>`)}
-            else if (year%100 !== 0&&year%400 === 0 ){document.write(`<strong>${year}는 윤년입니다</strong><br>`)}
-            else {document.write(result1)}
+            if ((year%4 === 0)||(year%100 !== 0&&year%400 === 0 )){return `${year}년은 윤년입니다<br>`}
+            return `${year}년은 ${result1}`
         }
 
-        computLeapYear(2023);
-        computLeapYear(2024);
-        //층수를 입력받아 별* 피라미드 출력 : show10StarPyramid
-        function show10StarPyramid(msg) {
-            for (let i = 1; i < msg; ++i) {
-                for (let j = msg; j > i; --j) {
-                    document.write(`*`);
+        document.write(computLeapYear(2023));
+        document.write(computLeapYear(2024));
+        //층수를 입력받아 별* 피라미드 출력 : showStarPyramid
+        function showStarPyramid(floor) {
+            let result = '';
+            for (let i = 1; i < floor; ++i) {
+                for (let j = floor; j > i; --j) {
+                    result += `*`;
                 }
-                document.write('<br>')
+                result += '<br>';
             }
+            return result;
         }
 
-        show10StarPyramid(10);
-        show10StarPyramid(30);
+        document.write(showStarPyramid(10));
+        document.write(showStarPyramid(30));
         //시분초를 입력받아 오전,오후 구분하여 출력: showAMPM
-        function showAMPM (msg) {
-            let time = msg;
+        function showAMPM (time) {
             let hour = time[0] + time[1];
 
-            if (hour < 12) {document.write(`am ${time}<br>`)}
-            else {document.write(`pm ${time}<br>`)}
+            if (hour < 12) {return `am ${time}입니다<br>`}
+            return `pm ${time}입니다<br>`
         }
-        showAMPM(`13:53:12`);
-        showAMPM(`09:53:12`);
+        document.write(showAMPM(`13:53:12`));
+        document.write(showAMPM(`09:53:12`));
         //국어, 영어, 수학을 입력하면 학점을 출력하는 함수 : computegrade
-        function computegrade (msg1,msg2,msg3) {
-            inform1 = msg1;
-            inform2 = msg2;
-            inform3 = msg3;
-            tot = Number(inform1) + Number(inform2) + Number(inform3);
-            avg = parseInt(tot/3);
-            avg1 = (avg >=90) ? '수' : (avg >=80) ? '우' : (avg >=70) ? '미' : (avg >=60) ? '양' : '가';
-            document.write(`국어 : ${inform1} 영어 : ${inform2} 수학 : ${inform3} 총점 : ${tot} 평균 : ${avg} 등급 : ${avg1}<br>`);
+        function computegrade (kor,eng,math) {
+            let grd = '가';
+            tot = kor + eng + math;
+            avg = parseInt(tot / 3);
+            switch (parseInt(avg/10)){
+                case 10 :
+                case 9 : grd = '수'; break
+                case 8 : grd = '우'; break
+                case 7 : grd = '미'; break
+                case 6 : grd = '양'; break
+            }
+            return `총점 : ${tot} 평균 : ${avg} 등급 : ${grd}<br>`;
         }
-        computegrade(85,75,95);
-        computegrade(65,75,25);
-        computegrade(65,75,65);
+        document.write(computegrade(85,75,95));
+        document.write(computegrade(65,75,25));
+        document.write(computegrade(65,75,65));
+        //전에 변수명을 지정해서 쓰던것을 매개변수로 변환하여 값을 입력 받으면
+        //가독성은 좋아지고 타이핑은 상당히 감소
+        //변수들을 한번에도 지정가능 ex) let tot =0, avg =0, grd = '가';
         //삼항 연산자 ? : 삼항 연산자 앞에 비교연산자가 실행되어 굳이 괄호가 필요 없음
         //하지만 가독성을 위해 괄호를 쓰는 것이 좋다
         //삼항 연산자가 사용하기는 편하지만 if문에 비해 가독성이 좋지 않다
