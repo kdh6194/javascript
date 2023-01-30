@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="../js/04example.js"></script>
+    <h3>25.복권 발행 프로그램작성</h3>
+    <script>
+        //사용자한테 숫자3자리 입력
+        //임의 복권 숫자 3자리 초기화
+        //입력한 복권 숫자가 모두 일치 : 백만 지급
+        //불일치 : 아쉽지만 다음기회
+        //  yourkey = [];
+        //  lottokey = [26,48,10];
+        //
+        //  for (let i =1; i <4; i++) {
+        //      yourkey.push(prompt(`복권숫자`))
+        //  }
+        // switch (yourkey[i]==[26,48,10]){
+        //          case true :
+        //              document.write(`축 상금 1백만 지급<br>`);break;
+        //          default :
+        //              document.write(`아쉽지만, 다음 기회를!<br>`)
+        //      }
+        //배열에 미쳐가지고 그냥 값을 입력받는 형태로 만들었으면 진즉끝냈다
+        //너무 최근에 배운것을 가지고 해결하려 하지말자
+
+
+        lotto_v1(`357`,`189`);
+        lotto_v1(`357`,`389`);
+        lotto_v1(`357`,`359`);
+        lotto_v1(`357`,`357`);
+    </script>
+
+    <script>
+
+        computeTax('y',6500)
+        computeTax(`Y`,6500)
+
+    </script>
+
+    <script>
+        // num1 = [];
+        // num2 = 35;
+        //
+        //for ()
+        //num1.push(parseInt(prompt(`1~100사이의 숫자`)));
+        // switch (num1 != num2) {
+        //
+        //         if (num1 > num2) {alert(`추측한 숫자가 큽니다<br>`)}
+        //         else(num1 < num2){alert(`추측한 숫자가 작습니다<br>`)}
+        //
+        //         if(num1==num2){alert(`빙고! 숫자를 맞췄습니다<br>`);break}
+        // i++;
+        // }
+        //거의 다 만들긴했는데 너무 배열을 쓰려고 했던것이 문제
+        //for반복문은 반복횟수가 정해저있기때문에 while반복문을 쓰는게 옳았다
+
+        let num1 = 345;
+        numcatch(num1);
+        //괄호안에 있는 숫자가 정답 숫자로 만듬
+    </script>
+
+    <script>
+        let num = parseInt(prompt(`입력한 숫자`));
+        numcount(num);
+    </script>
+
+    <script>
+        cardcheck(`404825`)
+        cardcheck(`123456`)
+        cardcheck(`438676`)
+        cardcheck(`515594`)
+        cardcheck(`356317`)
+    </script>
+
+    <script>
+        let daytime = `dawn`;
+        checkTime(daytime);
+    </script>
+
+    <script>
+        let account = 25000;
+        let interest = 6;
+        result = computeInvestment(account,interest);
+        document.write(result,`<br>`);
+    </script>
+
+    <script>
+        //구구단 v1
+        result = `<pre>
+             Multiplication   Table
+      1    2    3    4    5    6    7    8    9
+-----------------------------------------------
+1 |   1    2    3    4    5    6    7    8    9
+2 |   2    4    6    8   10   12   14   16   18
+3 |   3    6    9   12   15   18   21   24   27
+4 |   4    8   12   16   20   24   28   32   36
+5 |   5   10   15   20   25   30   35   40   45
+6 |   6   12   18   24   30   36   42   48   54
+7 |   7   14   21   28   35   42   49   56   63
+8 |   8   16   24   32   40   48   56   64   72
+9 |   9   18   27   36   45   54   63   72   81
+        </pre>`
+        document.write(result)
+    </script>
+
+    <script>
+//        result = `Multiplication   Table`
+//        result += `      1    2    3    4    5    6    7    8    9`
+//        result += `-----------------------------------------------`
+//        result += `1 |   1    2    3    4    5    6    7    8    9`
+//        result += `2 |   2    4    6    8   10   12   14   16   18`
+//        result += `3 |   3    6    9   12   15   18   21   24   27`
+//        result += `4 |   4    8   12   16   20   24   28   32   36`
+//        result += `5 |   5   10   15   20   25   30   35   40   45`
+//        result += `6 |   6   12   18   24   30   36   42   48   54`
+//        result += `7 |   7   14   21   28   35   42   49   56   63`
+//        result += `8 |   8   16   24   32   40   48   56   64   72`
+//        result += `9 |   9   18   27   36   45   54   63   72   81`
+//        document.write(result)
+    </script>
+
+<script>
+    //구구단 v2
+    result = `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Multiplication  Table <br>`
+    result += `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;9 <br>`;
+    result += `------------------------------------------------ <br>`;
+
+    for (let i = 1; i <=9; ++i) {
+        result += `${i}&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;` ;
+        for (let j = 1; j <=9; ++j) {
+            result +=`${i * j}&nbsp;&nbsp;&nbsp;&nbsp;`;
+        }
+        result += `<br>`;
+    }
+    document.write(result);
+</script>
+
+<script>
+    calendar(2022);
+</script>
+</body>
+</html>
