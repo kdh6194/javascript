@@ -20,7 +20,7 @@ let lotto_v1 = (lotto,mykey) =>{
 
 let computeTax = (marry,sale) => {
     // let mar = ['Y','y',`Yes`,`yes`,'네','결혼했습니다']
-    // console.log(mar == marry); --> 타입 성립이 되지않아 실행이 불가능
+    // console.log(mar == marry); --> 타입(자료구조가 다름) 성립이 되지않아 실행이 불가능
 
     switch (marry === 'Y') {
         case true :

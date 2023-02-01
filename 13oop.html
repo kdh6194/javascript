@@ -116,15 +116,15 @@
         //따라서, 값 조작도 불가
     </script>
 
-    <script>
-        user = new User3();
-        user._userid = 'asd456';
-        user.passwd = '987zxc';
-        console.log(user._userid) //출력되고있음
-        console.log(user.passwd)  //출력되고있음
-        // private는 private값이 선언된 곳에서만 수정이 가능하고
-        //추가로 지정한 값만 보여주지 처음 선언된 값을 모르게 하는 기능
-    </script>
+<!--    <script>-->
+<!--        user = new User3();-->
+<!--        user._userid = 'asd456';-->
+<!--        user.passwd = '987zxc';-->
+<!--        console.log(user._userid) //출력되고있음-->
+<!--        console.log(user.passwd)  //출력되고있음-->
+<!--        // private는 private값이 선언된 곳에서만 수정이 가능하고-->
+<!--        //추가로 지정한 값만 보여주지 처음 선언된 값을 모르게 하는 기능-->
+<!--    </script>-->
 
     <script>
         class User4 {
@@ -265,6 +265,16 @@
 
         document.write(sj);//write는 문자열로 출력하는 함수라서 toString()을 생략할 수 있다
         document.write(sj1);
+
+        let obj = {
+            _prop: 'default value',
+            set prop(value) {
+                this._prop = value;
+            }
+        };
+
+        obj.prop = 'new value';
+        console.log(obj._prop);
     </script>
     <script src="js/13oop.js"></script>
 
