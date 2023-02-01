@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 내장 객체</title>
+</head>
+<body>
+    <h1>자바스크립트 내장 객체</h1>
+    <h2>개요</h2>
+    <p>자바스크립트에서 기본적으로 제공하는 객체에 포함된
+        여러가지 함수를 알아봄</p>
+    <p>자바스크립트의 내장객체에는 크게 3가지로 분류
+        : Native, Host, 사용자정의 객체</p>
+
+    <h2>Native 객체</h2>
+    <p>EMCAScript 규격에 따라 정의된 객체</p>
+    <p>Object, String, Number, Function, Array, Date,
+        Math, RegExp등이 제공됨</p>
+    <p>이러한 객체들은 전역 객체global object라고 부름</p>
+
+    <h2>Function</h2>
+    <p>함수 정의시 사용</p>
+
+    <script>
+        let add = new Function('a','b','return a+b');
+        document.write(add(10,5),'<br>');
+    </script>
+
+    <h2>String</h2>
+    <p>문자열을 효율적으로 다룰 수 있게 해줌</p>
+    <p>String객체는 기본적으로 불변immutable 객체(변경불가)임</p>
+    <p>문자열은 기본적으로 문자열 상수풀pool을 이용해서 관리함</p>
+
+    <script>
+        let str1 = 'Hello,World!!'
+        let str2 = 'Hello,World!!'
+        let str3 = new String(`hello,World!!`); //상수풀을 확인하지않고 바로 생성해버림
+
+        document.write(str1 == str2, '<br>') // 값 비교
+        document.write(str1 == str3, '<br>')
+        document.write(str1 === str2, '<br>') // 값,자료형 비교
+        document.write(str1 === str3, '<br>')
+        //str1과 str2의 메모리번지는 동일 : 문자열 상수풀 때문임
+        //str1과 str3의 메모리번지는 서로 다름
+
+        document.write(str1[0],str2[6],'<br>');
+        //문자열은 문자들로 구성된 배열 - 부분적인 slice기능 제공
+
+        str1[0] = 'H';
+        document.write(str1[0],'<br>');
+        //문자열은 불변객체이므로 개별문자 수정 불가(글자 하나만 바꿀 수 없다는 얘기)
+
+        str4 = ['H','e','l','l','o']
+        str4[0] = 'h';
+        document.write(str4,'<br>');
+    </script>
+    <hr>
+    <script>
+        //length : 문자열 길이 반환
+        document.write(str1.length,'<br>')
+
+        //at : 지정한 위치의 문자 추출
+        //charAt : 지정한 위치의 문자 추출
+        document.write(str1.at(0),'<br>')
+        document.write(str1.charAt(0),'<br>')
+
+        //indexOf(찾는문자열) : 특정문자열의 존재여부 확인
+        //반환값은 해당 문자열의 위치 출력
+        document.write(str1.indexOf('World'),'<br>')
+        document.write(str1.indexOf('sayHello'),'<br>')
+
+        //lastIndexOf(찾는문자열) : 특정문자열의 존재여부 확인
+        //마지막에 발견된 문자열 존재여부 확인
+        //    0123456789012345678901234567  문자열의 위치값
+        str5=`Hello ,Hello, Hello, World!!`;
+
+        document.write(str5.indexOf('Hello'),'<br>')
+        document.write(str5.lastIndexOf('Hello'),'<br>')
+
+        //slice(시작,끝+1) : 지정한 범위내 문자 추출
+        //파이썬에서 사용되는 모양이다
+        //ex) str1에서 World 추출
+        document.write(str1.slice(6,11),'<br>')
+        //ex) str5에서 World!!추출
+        document.write(str5.slice(21,28),'<br>')
+        document.write(str5.slice(21),'<br>')
+        //끝자리가 최대자릿수까지 출력되면 끝자리를 아무리 늘려도 더 이상 출력이 되지 않음
+
+
+    </script>
+    <hr>
+    <script>
+        //카드번호 식별하기
+        let cardcheck = (cardnum) => {
+            let result = `잘못된 카드번호입니다`;
+            let cdnum = cardnum.slice(1);
+
+            if (cardnum.slice(0,1) === `4`) {
+                result = `visa - `;
+                if (cdnum === `04825`) {
+                    result += `비씨카드`
+                } else if (cdnum === `38676`) {
+                    result += `신한카드`
+                } else if (cdnum === `57973`) {
+                    result += `국민은행`
+                }
+            } else if (cardnum.slice(0,1) === `5`) {
+                result = `마스터카드 - `;
+                switch (cdnum) {
+                    case `15594` :
+                        result += `신한카드`;
+                        break;
+                    case `24353` :
+                        result += `외환카드`;
+                        break;
+                    case `40926` :
+                        result += `국민은행`;
+                        break;
+
+                }
+            } else if (cardnum.slice(0,2) === (`35`)) {
+                result = `JCB카드 - `;
+                cdnum = cardnum.slice(2)
+                switch (cdnum) {
+                    case `6317` :
+                        result += `NH농협카드`;
+                        break;
+                    case `6901` :
+                        result += `신한카드`;
+                        break;
+                    case `6912` :
+                        result += `KB국민카드`;
+                        break;
+                    // 문자열을 연결할때 +=가 없으면 연결이 안된다.
+                    // 다른 메서드를 쓰면 상관없음 하지만 메서드를 안쓴다면 += 요거를 사용해야함
+                }
+            }
+            return `${result}<br>`
+        };
+        document.write(cardcheck('356901'))
+        document.write(cardcheck('404825'))
+        document.write(cardcheck('540926'))
+        document.write(cardcheck('123456'))
+    </script>
+<hr>
+    <script>
+        // 2월1일출발
+        //substring() : slice동일 , 양수 지원
+        let jumin = `123456-1234567`;
+
+        let gender = jumin.substring(7,8);
+        document.write(gender,`<br>`);
+
+        gender = jumin.substring(-1); //작동은 안하지만 오류도 없다
+
+        //substr(st,cnt) -> deprecated(아직 사용되고있지만 신기능출시후 조만간 사라짐)됨
+        gender = jumin.substr(7,1);
+        document.write(gender,`<br>`);
+
+        //replace(찾는문자,대체할문자)
+        //ex) Hello를 Hi로 변경
+        document.write(str5.replace('Hello','Hi'),`<br>`);//replace는 찾는문자가 하나이상인 경우 하나만 바뀜
+
+        //만일 찾는 문자열이 하나 이상인 경우
+        //정규표현식 형태로 작성하고 적용범위를 지정해야 함
+        //적용범위 : g(global)
+        //정규표현식 -> /찾는 문자열/
+        document.write(str5.replace(/Hello/g,'Hi'),`<br>`); //메모리 내에서만 바뀐 내용만 보여줌
+
+        document.write(str5,`<br>`);//다시 변수에 담지않으면 원래 내용으로 돌아옴
+
+        //대소문자 구분없이 문자열을 찾고 싶으면 i 옵션 사용
+        //i : insensitive
+        document.write(str5.replace(/hello/g,'Hi'),`<br>`);
+        document.write(str5.replace(/hello/ig,'Hi'),`<br>`);
+
+        //toUpperCase, toLowerCase : 대소문자 변환
+        document.write(str5.toUpperCase(),`<br>`);
+        document.write(str5.toLowerCase(),`<br>`);
+
+        //concat : 문자열들을 하나로 합치는 함수 -> ++연산자 보다 사용하는 메모리를 줄일 수 있는 메소드
+        let str6 = `Hello` , str7 = 'World';
+        document.write(str6.concat(' ',str7,`<br>`));
+
+        //split(구분문자) : 문자열을 구분문자로 나눠 배열로 저장
+        //요건 파이썬이고 자바고 많이 사용된다
+        let today = '2023-02-01 09:58:45';
+
+        document.write(today.split('  '),`<br>`);//스페이스바 한번이면 , 두번이면 공백으로 나눠짐
+        document.write(today.split(' ')[0],`<br>`);
+        document.write(today.split(' ')[1],`<br>`);//스페이스바 두번이면 값이 출력이 안됨
+
+        //today 변수에서 년,월,일 추출
+        document.write(today.split('-')[0],`<br>`);
+        document.write(today.split('-')[1],`<br>`);
+        document.write(today.split(' ')[0].split('-')[2],`<br>`);
+        // '-'이거만 작성하면 - 뒷부분까지 출력
+
+        //today 변수에서 시,분,초 추출
+        document.write(today.split(' ')[1].split(':')[0],`<br>`);// ':'이거만 작성하면 : 앞부분까지 출력
+        document.write(today.split(':')[1],`<br>`);
+        document.write(today.split(':')[2],`<br>`);
+        //split은 계속연결하는것이 가능하다
+        //split은 주어진 값에서만 사용하는것이 맞다(날짜의 경우 Date객체가 있기때문에)
+    </script>
+    <hr>
+    <script>
+            //padStart,padEnd : 문자열 앞 뒤에 지정한 길이만큼 문자 추가
+            let month = '2'; //전체 자리 2자리, 나머지 0으로 채움
+            document.write(month,'<br>') //숫자 2 만 출력
+            document.write(month.padStart(2,`0`),'<br>');
+            //채우는 문자도 ``이나 ''으로 지정해주면 좋음
+
+            // 대학교 학번코드는 입학년도(2자리) +
+            //     학과번호(4자리) + 개인번호(6자리)로 구성
+            // 입학년도가 2022, 학과번호가 35, 개인번호가 157일때
+            // 완전한 학번코드를 작성하세요
+            // => 220035000157
+            let year = `2022`;
+            let depart = `35`;
+            let psno = `157`;
+            let hakbun = year.slice(2).padEnd(4,`0`).concat(depart.padEnd(5,`0`),psno)
+            //concat사용시 기준으로 잡은 변수명뒤로 다른 변수명을 연결해서 쓰는것이라
+            //concat하기이전에 필요한 값들은 concat앞에 사용하면 됨
+            //string객체의 메소드들은 계속연결하는것이 가능하다
+
+            document.write(hakbun,'<br>');
+
+            //repeat : 문자열을 지정한 횟수만큼 반복 (ES5)
+            document.write(hakbun.repeat(3),'<br>') //반복을 할때는 <br>태그가 작동안함
+    </script>
+
+    <h2>Number</h2>
+    <p>숫자를 다룰때 유용한 함수 제공</p>
+
+    <script>
+        // toFixed(소수자리수) : 소수점 이하 출력할 자리수 지정
+        let num = 3.141512;
+
+
+        document.write(num.toFixed(1),'<br>'); //소수점 첫째짜리
+        document.write(num.toFixed(2),'<br>'); //소수점 두번째짜리
+        document.write(num.toFixed(3),'<br>'); //소수점 세번째짜리
+    </script>
+
+    <h2>Math</h2>
+    <p>수학적 상수와 기타 함수 제공</p>
+
+    <script>
+        //round : 반올림 함수
+        document.write(Math.round(num),'<br>');
+        //floor : 무조건 내림
+        document.write(Math.floor(num),'<br>');
+        //ceil : 무조건 올림
+        document.write(Math.ceil(num),'<br>');
+        // ceil은 정수로 딱 떨어지면 그값 그대로 출력
+        // 소수점이 붙는순간 값을 올림
+
+        // random : 0~1사이 임의의 실수값을 출력
+        // 특정 범위 임의의 정수 생성 공식
+        // Math.floor(Math.random() * (max - min + 1)) + min
+
+        //ex) 위 공식을 이용해서 randInt라는 함수를 만듦
+        //1~45 사이 임의의 정수 6개를 출력
+        //매개변수는 max,min을 사용함
+
+        let randInt =  (min,max) => {return Math.floor(Math.random() * (max - min + 1)) + min}
+        //floor나 random을 사용할때는 앞에 Math가 꼭 붙어야하고
+        //random을 사용시 주의사항은 뒤에 괄호를 붙어야한다(안그럼 작동을 안함/오류에는 안잡힘)
+
+        for(let i =1; i <=6; ++i) //반복적으로 6개 출력
+            {document.write(randInt(1,45),' ')}//범위를 정할때는 +1,-1을 하지 않고 지정하면 된다
+    </script>
+
+    <h2>Date</h2>
+    <p>날짜와 시간을 다루는 함수</p>
+
+    <script>
+        // 날짜와 시간 생성
+        let datetime = new Date(); //현재 날짜,시간 기준(날짜,시간이 흘러 계속확인하면 값이 계속바뀜)
+
+        document.write(datetime,'<br>')
+        document.write(datetime.toLocaleString(),'<br>')
+        document.write(datetime.toLocaleDateString(),'<br>')
+
+        datetime = new Date('2022-12-31 11:59:30')
+        //사용자 정의 날짜시간 설정
+        document.write(datetime,'<br>')
+        document.write(datetime.toLocaleString(),'<br>')
+        document.write(datetime.toLocaleDateString(),'<br>')
+
+        datetime = new Date(2023,1-1,31,11,59,30)
+        //위와 같이 작성시 월-1 값을 해야함 => 월에서 0값이 1월을 가리킴
+        //만약 해당월의 지정한 날짜가 없으면 밀린 숫자 만큼 계산해서 날짜를 출력함
+        //사용자 정의 날짜시간 설정2
+        document.write(datetime,'<br>')
+        document.write(datetime.toLocaleString(),'<br>')
+        document.write(datetime.toLocaleDateString(),'<br>')
+
+        let date1 = new Date(`2023-02-01`);
+        let date2 = new Date(`2022-02-01`);
+
+        document.write(date1-date2,'<br>')
+        //날짜계산 결과는 1/1000 단위 초이므로 변환 필요
+        document.write(Math.floor((date1-date2)/1000),'<br>')
+        //초단위를 일단위로 변환
+        document.write(Math.floor((date1-date2)/86400000),'<br>')
+
+        //년월일시분초 출력시 2자리 단위로 출력
+        //남는 자리는 0으로 채움
+        //ex)  => 2023-02-01 12:08:15
+        today = new Date();
+        // time = String(today.toLocaleString()).padStart(2,'0')  ->요건 왜 안되는지 알아보자
+        time = String(today.getFullYear()).concat
+            ('-',String(today.getMonth()+1).padStart(2,'0')
+                ,'-',String(today.getDate()).padStart(2,'0')
+                ,' ',String(today.getHours()).padStart(2,'0')
+                ,':',String(today.getMinutes()).padStart(2,'0')
+                ,':',String(today.getSeconds()).padStart(2,'0')
+            )
+
+        document.write(time,'<br>')
+    </script>
+
+    <script>
+        //ex)파일명이 abc.123.png일때
+        //파일이름과 확장자로 분리하세요
+
+        let name = 'abc.123.png';
+        let fname = (a,b) => {return name.slice(a,b)}
+        let fext = (c) => {return name.slice(c)}
+
+        document.write(fname(0,7),'/',fext(8),'<br>')
+
+        //이렇게도 사용가능
+        let file = name.slice(0,name.lastIndexOf('.'));
+        let ext = name.slice(name.lastIndexOf('.')+1);
+
+        document.write(file,'/',ext,'<br>')
+    </script>
+
+    <script>
+        // 주민번호를 하나 입력받아
+        // 올바른 주민번호인지 여부를 출력하는 함수 작성
+
+        // 주민번호 검증 알고리즘
+        // 1) 주민번호 앞부터 12자리(지역번호까지)까지
+        //    각 자리를 2~9까지 곱한다.
+        // 2) 계산되어 나온 숫자를 모두 더한다.
+        // 3) 더한 숫자를 11로 나눈 나머지를 구한다.
+        // 4) 11에서 나머지를 뺀 값의 마지막 숫자와
+        //    13번째 숫자의 일치여부 확인
+
+        // 1  2  3  4  5  6 -  1  2  3  4  5  6      7
+        // 2  3  4  5  6  7    8  9  2  3  4  5
+        // 2  6 12 20 30 42    8 18  6 12 20 30
+        // ? == 7
+
+        //나중에 풀어보래요
+    </script>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+</body>
+</html>
