@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 JSON</title>
+</head>
+<body>
+    <h1>자바스크립트 JSON</h1>
+    <h2>개요</h2>
+    <p>JavaScript Object Notaion의 약자</p>
+    <p>데이터를 저장하거나 다른 시스템으로 전송시
+      많이 사용하는 데이터 교환 형식</p>
+
+    <p>즉, 시스템에 생성된 객체를 문자열 형태로 변환해서
+      네트워크를 통해 다른 곳으로 전송할때
+      자주 사용하는 데이터 형식을 의미</p>
+
+    <p>이때, 전환된 문자열에는 원하는 정보가 있는
+      객체의 속성을 그대로 포함되어야함</p>
+
+    <p>이전에 사용했던 데이터 교환형식인
+        XML에 비해 적은 코드로 데이터를 정의할 수 있음</p>
+
+    <script>
+        //아이디,비밀번호로 구성된 uesr객체의 정의1 - csv
+        //userid, passwd
+        //abc123, zxc123
+
+        //직렬화/역직렬화 등 추가 작업 필요
+    </script>
+
+    <script>
+        //아이디,비밀번호로 구성된 uesr객체의 정의2 - XML
+        //<user>
+        //  <userid>abc123</userid>
+        //  <passwd>zxc123</passwd>
+        //</user>
+
+        //csv에 비해 직렬화/역직렬화는 편하지만
+        //데이터 정의시 쓸데없는 코드가 많이 필요
+    </script>
+
+    <script>
+        //아이디,비밀번호로 구성된 uesr객체의 정의3 - json
+        let user = {
+            'userid' : 'abc123',
+            'passwd' : 'zxc123'
+        }
+        //csv,xml에 비해 직렬화/역직렬화가 편하고
+        //데이터 정의시 쓸데없는 코드도 많이 쓰이지 않음
+        //변수명이 따옴표를 쓰나 안쓰나에 따라 오브젝트와 차이점이라 보임
+    </script>
+
+    <h2>JOSN 직렬화/역직렬화</h2>
+    <p>stringify(직렬화) : 객체를 문자열로 변환하는 함수,
+        데이터를 서버로 전송 또는 객체 출력시 사용</p>
+
+    <p>parse (역직렬화) : 문자열을 객체로 변환하는 함수,
+        서버가 보내 준 데이터를 클라이언트에서 작업시 사용</p>
+
+    <script>
+        //위에서 만든 user 객체 출력하기
+        document.write(user,'<br>')
+
+
+        //위에서 만든 user 객체 출력하기2
+        let user2 = {
+            'userid' : 'abc123',
+            'passwd' : 'zxc123',
+            toString() {
+                return `${this.userid} ${this.passwd}`
+            }
+        }
+        document.write(user2,'<br>') //객체의 내용을 출력하기위해 toString함수 추가
+        //하지만, 객체의 속성이 추가되면 toString함수 수정 필요
+
+
+        //위에서 만든 user 객체 출력하기3 - stringify
+        let json = JSON.stringify(user)
+        document.write(json,'<br>')
+        //stringify함수만으로 객체 내용 출력
+    </script>
+<hr>
+    <script>
+        user = `{"userid":"abc123","passwd":"zxc123"}`;
+        let obj = JSON.parse(user);
+
+        document.write(obj.userid, '<br>')
+        document.write(obj.passwd, '<br>')
+        //중괄호 밖에는 '(작은따옴표)`(백틱)만 사용가능, 안에는 "(큰따옴표)를 써야한다
+    </script>
+<hr>
+    <script>
+        let sjs = `[{"name": "혜교", "grd": "수"},
+                    {"name": "지현", "grd": "미"},
+                    {"name": "수지", "grd": "가"}]`;
+        obj = JSON.parse(sjs) //obj 변수명에 sjs를 객체화한것을 담고
+        document.write(obj,'<br>'); //Object형태로 출력됨(객체로 변환했기때문에)
+        //하지만 객체 안에 있는 내용을 바로 알 수 없기때문에
+        //배열객체를 구성하는 개별요소에 접근하려면
+        //객체명[인덱스].속성명 형식으로 사용해야함
+        document.write(obj[0].name,' ',obj[0].grd,'<br>');
+        document.write(obj[2].name,' ',obj[2].grd,'<br>');
+    </script>
+<hr>
+    <script>
+        //users 배열에서 abc123이 존재하는지 확인
+        users = ['abc456','abc789','zxc123','abc123','zxc456'];
+
+        for (let i=0; i<=4;++i) { document.write(`${i+1}:`)
+            if (users[i] == 'abc123') {document.write('abc123 ')}
+            else {document.write('없습니다 ')}
+        }
+    </script>
+<hr>
+    <script>
+        //지현 학생의 성적 출력한다면 1
+        let sj = null; //초기화 작업
+        for (let i = 0; i < obj.length; ++i) {
+            if (obj[i].name == "지현") {
+                sj=obj[i];
+                break;
+            }
+        }
+        document.write(`이름 : ${sj.name},성적 : ${sj.grd}<br>`);
+        //확장성을 고려한다면 if에서 출력하는것이 아닌 밖에서 처리하는것이 좋다
+        //반복문에서 객체가 몇개가 있는지 모르기때문에
+        //  -> i < obj.length 쓴다면 객체가 끝날때까지 반복하게 만든다
+        //원하는 값을 찾았는데도 돌고있으면 낭비니까 break를 걸어준다
+        //변수명에서 객체를 해체하고 속성을 찾는 작업이 안되기때문에
+        //요소(객체명[인덱스]).속성명을 대입하여 동작시키면 된다
+        //이건 내가 검사도 체크도 다할거야
+    </script>
+
+    <script>
+        //지현 학생의 성적 출력한다면 2
+        // [] 배열로 묶지 않는다면 여러 중괄호{}들의 안에 있는 값들은 인정되지 않는다
+        // 그외에 객체를 벗어나는 문법은 동작조차 하지않음
+        sjs = `{"sjs1" : [{"name": "혜교", "grd": "수"},
+                        {"name": "지현", "grd": "미"},
+                        {"name": "수지", "grd": "가"}]}`;
+        obj = JSON.parse(sjs);
+        sj = obj.sjs1.filter(s => (s.name=="지현"));
+        document.write(`이름 : `,sj[0].name,`,성적 : `,sj[0].grd,`<br>`);
+        // sj = obj.속성명.filter(function (s) {
+        //     if(s.name == `지현`) return s;
+        //     document.write(s.name, '<br>');
+        // }); 콜백함수로 풀어서 동작
+
+        //filter : 대상 객체의 요소를 순회해 가며
+        //콜백함수에 매개변수로 넘긴 후 처리
+        //결과는 배열형태로 넘겨 받음
+        //filter, map, reduce : 고차함수
+
+        // filter를 사용할때 속성명이 제대로 지정되었는지 확인해야함
+        // ex) 속성명이 "sjs 라고 한다면 동작을 안함(속성명에서 실수가 있으면 동작을안함)
+        //filter로 객체 검색시 검색대상의 자료형이 객체타입이여야한다
+        //배열 형태로 묶여있는경우 객체형태로 바꿔야한다
+        //검사는 니가하고 체크는 내가한다
+
+
+    </script>
+</body>
+</html>
