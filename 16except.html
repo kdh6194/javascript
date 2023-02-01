@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 예외처리</title>
+</head>
+<body>
+    <h1>자바스크립트 예외처리</h1>
+    <h1>개요</h1>
+    <p>프로그램의 실행을 중단시키는 요인을 에러 또는 예외라고 함 </p>
+    <p>에러error : 개발자가 조치할 수 없는 시스템 상의 오류
+        ex) 네트워크 오류, 전원 차단으로 인한 오류</p>
+    <p>예외except : 개발자가 조치할 수 있는 시스템 상의 오류
+        ex) 문법오류, 논리오류, 실행 오류</p>
+
+    <p>자바 스크립트의 오류는 try - catch 문을 통해 관리 가능</p>
+
+    <script>
+      document.write('-프로그램 시작-','<br>')
+      document.write(`100/10 = ${100/10}`, '<br>')
+      document.write('-프로그램 끝-','<br>')
+      //정상실행 - 시작/끝 메세지 출력!
+    </script>
+
+    <script>
+      document.write('-프로그램 시작-','<br>')
+      // document.write(`100/abc123 = ${100/num}`, '<br>')
+      document.write('-프로그램 끝-','<br>')
+
+      //실행중단 - 시작 메세지만 출력!
+    </script>
+
+    <script>
+        //예외처리 1  ->오류가 발생하더라도 오류만 중지시키고 다음것은 진행
+        document.write('-프로그램 시작-','<br>')
+        try {  //문제있는 코드를 격리시키는 느낌
+            document.write(`100/abc123 = ${100 / num}`, '<br>') // 문제가 있는 코드
+        } catch (e) {
+            document.write('오류발생! - num변수를 선언하고 쓰세요!<br>') //오류가 발생했을때 처리하는 동작
+        }
+        document.write('-프로그램 끝-','<br>')
+    </script>
+
+    <script>
+        //예외처리 2
+        try { //문제있는 코드와같이 격리시켜보았음
+            document.write('-프로그램 시작-', '<br>')
+            document.write(`100/abc123 = ${100 / num}`, '<br>')
+            document.write('-프로그램 끝-', '<br>')
+        } catch (e) {
+            document.write('오류발생!<br>')
+        }//오류발생지점이후에는 catch문으로 넘어가서 실행되어
+        // 오류발생지점이후는 출력이 되지않음
+    </script>
+
+    <p>try { </p>
+    <p> 예외가 발생할만한 코드들 </p>
+    <p> } catch(객체) { </p>
+    <p> 예외처리코드 </p>
+    <p> } </p>
+
+    <h2>오류 정보 확인</h2>
+    <p>error 객체의 name,message,stack 속성으로 확인 가능</p>
+
+    <script>
+        try {
+            document.write(`100/abc123 = ${100 / num}`, '<br>')
+        } catch (e) {
+            document.write(e.name,`<br>`) // 오류 종류(콘솔에서 보여주던 에러명)
+            document.write(e.message,`<br>`) // 오류 메세지
+            document.write(e.stack,`<br>`) // 오류발생 추적사항
+        }
+        //디버깅용으로 쓰이는 모양이다
+        //나쁘진 않은데 매번 적용시키는것이 귀찮을것 같다
+        //인텔리제이에서 디버깅으로 찾는것보단 직관적일수도 있을 것 같다
+    </script>
+
+    <h2>유형별 예외처리</h2>
+    <p>오류 유형별로 메세지 처리를 상이하게 하고 싶으면
+        instanceof 연산자를 사용하면 됨</p>
+    <p>referenceError : 변수선언과 관련된 오류</p>
+    <p>rangeError : 범위와 관련된 오류</p>
+    <p>sysntaxError : 문법과 관련된 오류</p>
+    <p>typeError : 변수나 객체의 자료형과 관련된 오류</p>
+
+    <script>
+        try {
+            document.write(sayHello);
+        } catch (e) {
+            if(e instanceof ReferenceError) //발생한 오류가 ReferenceError와 관련있는가?
+            document.write(e.message);
+        }
+    </script>
+
+    <h2>인위적으로 오류발생시키기</h2>
+    <p>특정 코드에 의해 발생되는 오류 외에도
+        로직이 정상적으로 수행되는 특정조건을
+        만족하지 못했을때 의도적으로 오류를 발생시켜
+        catch 블럭에 의해 예외처리를 해야할 경우가 있음</p>
+
+    <p>이때 'throw 오류객체명' 구문으로
+        오류를 발생시킬수 있음</p>
+
+<script>
+    let checkAge = () => {
+        if (age < 0 || age >= 100) {
+            document.write('나이를 정확하게 입력하세요')
+        }
+    }
+
+    let checkAge2 = (a) => {
+        if (age < 0 || age >= 100) {
+            throw new RangeError;                               //변수선언관련 에러
+            //document.write(`${a}`,'나이를 정확하게 입력하세요'); ->문법관련 에러
+        }// 나이의 범위가 벗어나면 인위적인 오류 발생
+    }
+    try {
+        checkAge2(150)
+    } catch (e) {
+        if(e instanceof ReferenceError)
+            document.write('나이를 정확하게 입력하세요');
+    }//이렇게 try - catch 문을 사용한다면 에러 또한 처리한것으로 인식하는 모양이다
+</script>
+
+</body>
+</html>
