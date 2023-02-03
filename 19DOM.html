@@ -49,7 +49,7 @@
               인류가 그것을 측정해낸 게 놀랍다</p>
           <p id="three" class="second">어디서도 보지 못했던,
               아무도 경험하지 못했던 완전히 새로운 게임</p>
-          <table id ='four'>
+          <table id ='four' class="fourth">
               <tr><th>이름</th><th>국어</th><th>영어</th><th>수학</th></tr>
               <tr><td>혜교</td><td>99</td><td>98</td><td>99</td></tr>
               <tr><td>지현</td><td>54</td><td>77</td><td>87</td></tr>
@@ -59,7 +59,7 @@
       </div>
 
       <script>
-          const one = document.getElementById('one') //id는 단수(유일한 값으로 작성해야하는듯하다)
+          const one = document.getElementById('one'); //id는 단수(유일한 값으로 작성해야하는듯하다)
           // 단수와 복수들의 차이점도 알아두면 좋을듯하다
 
           //선택한 요소에 css 스타일을 지정하려면
@@ -68,25 +68,309 @@
           //소스상에는 색상과 관련된 코드가 없다면 자바스크립트로 작성한 것이다
 
           //two라는 요소의 텍스트를 진하게 표시
-          const two = document.getElementById('two')
+          const two = document.getElementById('two');
 
-          two.style.fontWeight = 'bold'
+          two.style.fontWeight = 'bold';
           //three라는 요소는 배경색을 검정으로 지정
-          const three = document.getElementById('three')
+          const three = document.getElementById('three');
 
-          three.style.background = 'black'
-          three.style.color = 'yellow'
+          three.style.background = 'black';
+          three.style.color = 'yellow';
 
-          const four = document.getElementById('four')
-            const second = document.getElementsByClassName('second')
-          four.border = '5px solid black'                          //축약은 가능하다
-          second.margin = '5px 2px'  //세부사항들은 어캐 건드는지를 모르니 진행이 안됨
+          const four = document.getElementById('four');
+          four.border = '5px solid black';                   //축약은 가능하다
+          //세부사항들은 어캐 건드는지를 모르니 진행이 안됨
       </script>
 
 
-      <script></script>
-      <p></p>
-      <p></p>
+      <p>여러 요소들을 태그이름으로 찾으려면
+          document.getElementsByTagName를 사용,
+          반환값은 HTMLCollection객체(유사배열)에 저장</p>
+
+      <p>여러 요소들을 클래스이름으로 찾으려면
+          document.getElementsByClassName를 사용,
+          반환값은 HTMLCollection객체(유사배열)에 저장</p>
+
+      <p>여러 요소들을 클래스 선택자로 찾으려면
+          document.querySelectorAll을 사용,
+          반환값은 NodeList객체(유사리스트)에 저장</p>
+
+      <div>
+          <p class="two">시간은 금이라구 친구</p>
+          <p class="two">별의 영역이 광활하다는 건 놀라운 것이 아니다.
+              인류가 그것을 측정해낸 게 놀랍다</p>
+          <p class="third">어디서도 보지 못했던,
+              아무도 경험하지 못했던 완전히 새로운 게임</p>
+      </div>
+
+      <script>
+          //문서제목title 바꾸기
+          let title = document.getElementsByTagName('title');
+          console.log(title[0].innerText); //innerText는 title사이에 있는 문자열을 불러온것?인지 알아볼것
+          title[0].innerText = 'Hello,DOM';//문서(소스)의 제목을 변경시켰다
+
+          //클래스이름이 two인 요소들의 스타일 변경
+          let p = document.getElementsByClassName('two');
+          console.log(p);
+          p[0].style.color = 'blue';
+          p[1].style.background = 'yellow';
+      </script>
+
+      <div>
+          <p class="fifth">시간은 금이라구 친구</p>
+          <p class="fifth">별의 영역이 광활하다는 건 놀라운 것이 아니다.
+              인류가 그것을 측정해낸 게 놀랍다</p>
+          <p class="sixth">어디서도 보지 못했던,
+              아무도 경험하지 못했던 완전히 새로운 게임</p>
+      </div>
+
+      <script>
+          //querySelector는 괄호 안에(.클래스명 , #아이디명) 등 css선택자를 사용하여 요소를 찾을 수 있다
+          //.fifth 하나만 선택 -> 단수요소일때만 사용
+          let fifth = document.querySelector('.fifth');
+          console.log(fifth);
+          fifth.style.textDecoration = 'underline';
+
+          //.fifth 모두(복수) 선택 -> querySelectorAll는 배열과 비슷한 객체인 nodeList를 반환한다
+          fifth = document.querySelectorAll('.fifth');
+          console.log(fifth);
+          fifth[0].style.fontstyle='italic';
+          fifth[1].style.fontstyle='italic';
+          //fifth.style.fontstyle='italic' 이렇게 작성하면 적용이 되지안음
+          // 어떻게 작성했는가에 따라 적용이 안되는 경우가 있다
+      </script>
+
+      <h2>속성 다루기</h2>
+      <p>특정 요소의 속성을 다룰려면 setAttribute를 사용</p>
+
+      <div><img id = 'img1' alt=""></div>
+      <div><button type="button" onclick="showing()">이미지</button></div>
+
+      <script>
+          let showing = () => {
+              let img = document.querySelector('#img1')
+              img.setAttribute('src','img/smile.png')
+              img.setAttribute('width','50%')
+              img.setAttribute('height','50%')
+          };
+      </script>
+
+      <h2>새로운 요소 추가</h2>
+      <p>태그이름을 인자로 전달해서 문서상에
+          새로운 요소를 생성하려면 createElement를 사용</p>
+
+      <p>지정한 요소를 특정 요소의 자식 요소로 추가하려면
+          appendChild를 사용</p>
+
+      <p>텍스트 노드를 추가하려면 createTextNode를 사용</p>
+
+      <div id = 'img2'></div>
+      <div><button type="button" onclick="showing2()">이미지2</button></div>
+
+      <script>
+          let showing2 = () => {
+              let div = document.querySelector('#img2');
+              //부모요소와 자식요소를 만들기 위해 설정된 아이디를 불러옴
+              console.log(div.firstChild);
+
+              let img = document.createElement('img');
+              //자식요소가 없으니 함수에서 생성
+              div.appendChild(img); //appendChild를 사용해서 부모요소와 자식요소로 만듬
+              img.setAttribute('src','img/sns3.jpg')// 만들어진 자식요소에 사용할 동작을 구현
+              //setAttribute(속성명,속성값)으로 작성되어야한다
+              console.log(div.firstChild);
+          };
+      </script>
+
+      <h2>성적 결과 리스트</h2>
+      <div id = 'sj'></div>
+
+      <script>
+          // table, tr, th, td태그 등을 이용해서
+          // 이름, 국어, 영어, 수학을 목록형태로 출력
+          let thdata = ['이름','국어','영어','수학'];
+          let sjdata = ['동은',95,95,95];
+
+          //성적테이블이 삽입될 위치 잡기
+          let sj = document.querySelector('#sj');
+          //테이블생성
+          let table = document.createElement('table');
+          table.setAttribute('border','1px');
+          table.setAttribute('width','500px');
+          table.setAttribute('cellspacing','0');
+          table.setAttribute('cellpadding','10');
+          //테이블의 제목행 생성
+          let tr = document.createElement('tr');
+
+          for (let val of thdata) {
+              let th = document.createElement('th');
+              let txt = document.createTextNode(val);
+              th.appendChild(txt);
+              tr.appendChild(th);
+          }//반복문과 배열에서 뺴오는 것을 이용하여 같은 구문을 쓰는 방법(노가다)을 사용하지 않아도 된다
+          table.appendChild(tr);
+
+          tr1 = document.createElement('tr'); //요소를 생성할때 변수명이 아닌 태그명으로 작성되어야 한다
+          for (let val of sjdata) {
+              let td = document.createElement('td');
+              td.setAttribute('align','center');
+              let txt = document.createTextNode(val);
+              td.appendChild(txt);
+              tr1.appendChild(td);
+          }
+
+          table.appendChild(tr1);
+          //행을 내릴때 한줄이 끝나면 한줄을 다시작성하는 느낌으로 만들어야됨
+          // 생성한 요소를 sj에 삽입
+          sj.appendChild(table);
+      </script>
+
+      <h2>시/구/동 검색</h2>
+      <div>
+          <select id = 'sido' onchange = 'getGugun()'></select>
+          <select id = 'gugun' onchange = 'getDong()'></select>
+          <select id = 'dong' onchange = 'getAddr()'></select>
+          <p id = 'myaddr'></p>
+      </div>
+
+      <script>
+          let sidodata = ['서울특별시','경기도','대구광역시','대전광역시','부산광역시'];
+          let gugundata = [
+              ['강남구', '서초구', '종로구', '송파구'],
+              ['과천시', '광명시', '성남분당구'],
+              ['연수구'],
+              ['부산진구'],
+              ['서귀포시']
+          ];
+          let dongdata = [
+              [['논현동','대치동','삼성동'],
+                  ['반포동','방배동','양재동'],
+                  ['광희동','명동','충무로'],
+                  ['가락동','석촌동']],
+              [['과천동'],
+                  ['광명동'],
+                  ['대장동']],
+              [['연수동']],
+              [['개금동','가야동']],
+              [['강정동']]
+          ];
+
+          let sido = document.querySelector('#sido');
+          let gugun = document.querySelector('#gugun');
+          let dong = document.querySelector('#dong');
+
+          let addrTitle = (parent,title) => {
+              //선택한 시도로 시군구 항목 추가
+              let opt = document.createElement('option');
+              let txt = document.createTextNode(title);
+              opt.appendChild(txt);
+              parent.appendChild(opt);
+
+          }
+          let getSido = () => {
+              //<option>-광역시-</option>
+              addrTitle(sido,'-광역시-')
+
+              //<option>서울특별시</option>
+              // ...(반복)
+              for (let val of sidodata) {
+                  let opt = document.createElement('option');
+                  let txt = document.createTextNode(val);
+                  opt.appendChild(txt);
+                  sido.appendChild(opt);
+              }
+
+              addrTitle(gugun,'-시/군/구-')
+
+              addrTitle(dong,'-읍/면/동-')
+          };
+          let getGugun = () => {
+              //console.log(sido.value,sido.selectedIndex-1)//selectedIndex는 선택된 옵션의 인덱스값이다
+
+              //기존 시군구 제거
+              while (gugun.firstChild) { //시군구에 항목이 있다면
+                  gugun.removeChild(gugun.firstChild)
+              }
+              //addrtitle를 적용
+              addrTitle(gugun,'-시/군/구-')
+
+              // 선택한 시의 구군들
+              if(sido.selectedIndex > 0) {
+                  for (let val of gugundata[sido.selectedIndex - 1]) {
+                     let opt = document.createElement('option');
+                     let txt = document.createTextNode(val);
+                      opt.appendChild(txt);
+                      gugun.appendChild(opt);
+                  }
+              }
+          };
+          let getDong = () => {
+              //console.log(dongdata[sido.selectedIndex-1][gugun.selectedIndex-1])
+
+              while (dong.lastChild) { //시군구에 항목이 있다면
+                  dong.removeChild(dong.lastChild)
+              }
+              addrTitle(dong,'-읍/면/동-')
+
+              if (gugun.selectedIndex > 0 && sido.selectedIndex > 0) {//시도.selectedIndex > 0 and
+                  for (let val of dongdata[sido.selectedIndex - 1][gugun.selectedIndex - 1]) {
+                      // 이차원적인 행동을 진행하기 위해선 행과 열로 구분하면된다
+                      //처음 실행하는 동작은 행으로진행한다 생각하고
+                      //다음 실행하는 동작은 열로 진행한다 생각하면된다
+                      //ex) sido.selectedIndex-1 이것만 쓰이면 시도에 걸려있는
+                      // sido에 시, 구, 동 addrTitle들이 설정되어 있기 때문에
+                      // 선택할 수 있는 select문들이 모두 해당되어 반복문에
+                      // 설정된 인덱스로 적용 되는 모양이다
+                      // 시 , 군, 동을 선택한 후 다시 '-읍/면/동-'같은 select문의 맨처음 상단을 선택시
+                      // selectedIndex의 값이 0-1 이라는 동작으로 인식해서
+                      // 에러를 발생 시킨다 그러므로 예외처리를 하던가
+                      // -1을 적용하지 않아도 적용되는 구문을 작성해야할것
+                     let opt = document.createElement('option');
+                     let txt = document.createTextNode(val);
+                      opt.appendChild(txt);
+                      dong.appendChild(opt);
+                  }
+              }
+          };
+          let getAddr = () => {
+              if (dong.selectedIndex > 0) {
+                  let result = ` 선택한 주소 : ${sido.value}${gugun.value}${dong.value} `;
+                  let myaddr = document.querySelector(`#myaddr`);
+
+                  myaddr.innerHTML = result; // html처럼 출력
+                  // myaddr.innerText =result;  -> raw text형태 출력
+              }
+          };
+          getSido();
+          //객체의 수가 맞지않아서 오류가 발생한 부분있다
+          //변수나 객체의 자료형과 관련된 오류가 발생된 것으로 보아 맞는듯하다
+      </script>
+
+      <h2>요소 내용 바꾸기</h2>
+      <p>innerHTML : html 요소내에 마크업을 포함한
+          무언가를 삽입/수정/제거할때 사용</p>
+      <p>textContent : 요소의 텍스트 컨텐츠를
+          가져오거나 변경할때 사용</p>
+
+      <div>
+      <span id = 'msg1'>-1-</span>
+      <span id = 'msg2'>-2-</span>
+          <p>게임목록</p>
+          <ul id = 'games'></ul>
+      </div>
+
+      <script>
+          let msg1 = document.querySelector('#msg1')
+          let msg2 = document.querySelector('#msg2')
+          let games = document.querySelector('#games')
+
+          msg1.innerHTML = '<p>Hello,World!!</p>'// id명.innerHTML = 변경하고 싶은 내용
+          //msg2.innerText = '<p>Hello,World!!</p>' --> 불필요한 공백은 제거
+          msg2.textContent = '<p>Hello,World!!</p>'// innerText보다 호환성이 좋다, 모든 텍스트를 가져옴
+          games.innerHTML = '<li>디아블로</li>'
+          //innerHTML을 썻을때 줄바꿈한 이유 : 사용된 태그가 p태그여서
+          // (p태그의 경우 해당줄이 block이 걸려있고 span인경우 문자열수만큼만 block이 걸려있기 때문에)
+      </script>
       <p></p>
       <p></p>
       <p></p>
