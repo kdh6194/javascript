@@ -182,7 +182,8 @@
                 if (chcnt > 100) {
                     chrcnt.style.color = 'red'
                 }
-            }); //입력되지 않는 방향키를 눌러도 숫자가 카운트 됬다
+            }); // 내 생각에 키다운이 되고나서야 초기화 시작이되고
+                // 글자수를 카운트하는 기준이 length기준으로
 
             // intro.addEventListener('keypress',()=>{
             //     let chcnt = intro.value.length
@@ -235,7 +236,11 @@
             let uid1 = document.querySelector('input[name = "uid"]')
             let pwd1 = document.querySelector('input[name = "pwd"]')
             let name = document.querySelector('input[name = "name"]')
-            let gdr = document.querySelector('input[name = "gender"]')
+            let gdr = document.querySelectorAll('input[name = "gender"]')
+            //값이 두개 이상 일때 querySelectorAll로 하여 갑을 잡아내야 한다
+            //querySelector로 잡으면 하나의 값만 잡아서
+            // 여러 값이 필요한 조건에서 에러 발생
+
             let warn1 =  document.querySelector('#warn1')
             let warn2 =  document.querySelector('#warn2')
             let warn3 =  document.querySelector('#warn3')
@@ -250,9 +255,10 @@
                 warn2.textContent='';
                 warn3.textContent='';
                 warn4.textContent='';
+
                 if (uid1.value == '') {
                     warn1.textContent ='아이디를 입력하세요'
-                    uid1.focus();
+                    uid1.focus(); // 바로 키보드에 입력할 수 있는 상태로 만들어줌
                 }
                 else if (pwd1.value == '') {
                     warn2.textContent ='비밀번호를 입력하세요'
@@ -262,9 +268,8 @@
                     warn3.textContent ='이름을 입력하세요'
                     name.focus();
                 }
-                else if (!gdr[0].checked&&!gdr[1].checked) {
-                    warn4.textContent ='성별을 선택하세요'
-                    gdr.focus();
+                else if (!gdr[0].checked && !gdr[1].checked) {
+                    warn4.textContent ='성별을 선택하세요';
                 }
                 else {alert('입력하시 정보를 전송을 진행하고 있습니다')}
             }
