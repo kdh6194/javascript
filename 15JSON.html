@@ -97,9 +97,17 @@
         obj = JSON.parse(sjs) //obj 변수명에 sjs를 객체화한것을 담고
         document.write(obj,'<br>'); //Object형태로 출력됨(객체로 변환했기때문에)
         //하지만 객체 안에 있는 내용을 바로 알 수 없기때문에
+        //배열로 바꿔야만 값을 알 수 있다(확인해보면 undefined값이 나오기 때문에)
         //배열객체를 구성하는 개별요소에 접근하려면
         //객체명[인덱스].속성명 형식으로 사용해야함
-        document.write(obj[0].name,' ',obj[0].grd,'<br>');
+        // for (let [idx,val] of obj) {
+        //     document.write(idx,val,'<br>');
+        // } 객체를 변환할때 이렇게 실행이 불가능한다(반복이 불가능하다고 나옴)
+        for (let v of obj) {
+            document.write(v.name,'<br>');
+        } //for(let val of 변수명) => 자바스크립트 내에서 반복적으로 값을 낼때
+        // 기존에 설정된 인덱스 값대로 처리해서 명령이 꼬이지 않는듯
+        document.write(obj[1].name,' ',obj[1].grd,'<br>');
         document.write(obj[2].name,' ',obj[2].grd,'<br>');
     </script>
 <hr>
