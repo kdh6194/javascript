@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 Ajax - zipcode</title>
+</head>
+<body>
+      <h1>자바스크립트 Ajax - zipcode</h1>
+      <h2>개요</h2>
+      <p>
+        1. tomcat.apache.org에서 tomcat 서버를 다운로드하고
+        적당한 곳에서 압축해제해 둠<br>
+
+        2. webapps/ROOT에 sido.jsp, gugun.jsp, dong.jsp에
+        복사해 둠 (23zipcode.html도 마찬가지!)<br>
+
+        3. bin/startup.bat로 서버 시작해 둠<br>
+
+        4. http://127.0.0.1:8080/server/sido.jsp로 실행 확인<br>
+
+        5. 실습확인은 http://127.0.0.1:8080/23zipcode.html을 이용함<br>
+
+        6. 선택한 시도에 대한 구군 조회는 'gugun.jsp?sido=시/도이름' 로 함<br>
+
+        7. 선택한 시도와 구군에 대한 동 조회는
+        'dong.jsp  ?sido=시/도이름  &  gugun=구/군이름' 으로 함
+      </p>
+
+      <div>
+        <select id = 'sido'></select>
+        <select id = 'gugun'></select>
+        <select id = 'dong'></select>
+      </div>
+
+      <script>
+          //http://127.0.0.1:8080/23zipcode.html(톰캣이 권한을 준 주소)가
+          // 아닌 localhost주소로 들어가면 안됨
+          //이 주소로 들어가지않으면 톰캣에서 권한을 주지않아 에러가 발생한다
+
+          //ojdbc8-19.3.0.0 파일이 없을때 에러발생(이유 : )
+          //jsp에 선언된 sql의 테이블명과 데이터베이스의 테이블명이 같지 않으면 에러발생
+
+        // 23zipcode.html 파일을 넣지 않았다면 크로스 에러가 발생
+          // 이유: 관리자가 권한을 주지않았으므로
+          // 데이터 받는것을 거부하는 반응이 나타난것
+
+          let url1 = 'http://127.0.0.1:8080/server/sido.jsp';
+          let url2 = 'http://127.0.0.1:8080/server/gugun.jsp';
+          let url3 = 'http://127.0.0.1:8080/server/dong.jsp';
+
+        let sido = document.querySelector('#sido');
+        let gugun = document.querySelector('#gugun');
+        let dong = document.querySelector('#dong');
+
+        // 시군구를 선택하려면 변수명.jsp?변수명=값
+        // 두번 타고 들어가야하면  변수명.jsp?변수명a=값&변수명b=값
+          // 제대로 만든다면 질의문을 상당히 신경써서
+
+        let makeopt = (elm,text) =>{
+            // 기본 option 요소 추가 appendChild에서 연결이 잘되었는지 확인할 것
+            let opt = document.createElement('option');
+            let txt = document.createTextNode(text);
+            opt.appendChild(txt);
+            elm.appendChild(opt);
+        };
+
+        function setSido(sidos) {
+            //응답 데이터를 , 로 구분해서 배열에 저장
+            let cols = sidos.split(',');
+            //cols.pop();
+
+            makeopt(sido,'-광역시-');
+            makeopt(gugun,'-시/군/구-');
+            makeopt(dong,'-읍/면/동-');
+
+            // 시도 option요소 추가
+            for (let col of cols) {
+                if (col == '') {continue;}
+                makeopt(sido,col)
+            }
+        }//setSido
+
+        //1. 시도출력
+          let getsido = () =>{
+             // let req = new XMLHttpRequest();
+             // req.onreadystatechange = () =>{
+             //     if (req.readyState == 4 && req.status == 200) {
+             //         console.log(req.responseText)
+             //         setSido(req.responseText);
+             //     }
+             // };
+             // req.open('get',url1);
+             // req.send();
+              fetch(url1).then(response => response.text())
+                            .then(text => setSido(text));
+          };
+
+        //시도를 선택했을때 이벤트 처리
+        sido.addEventListener('change',() => {
+            let qry = '?sido=' + sido.value;
+
+            //선택한 시도가 '-광역시-'라면 함수 실행중지
+            if(sido.selectedIndex == 0) {return;}
+
+            let req = new XMLHttpRequest();
+            req.onreadystatechange = () =>{
+                if (req.readyState == 4 && req.status == 200) {
+                    console.log(req.responseText);
+                    setGugun(req.responseText);
+                }
+            };
+            req.open('get',url2+qry);
+            req.send();
+        })
+
+
+          gugun.addEventListener('change',()=>{
+            let qry = '?sido=' + sido.value +'&gugun='+ gugun.value
+            if(gugun.selectedIndex == 0) {return;}
+
+            let req = new XMLHttpRequest();
+            req.onreadystatechange = () =>{
+                if (req.readyState == 4 && req.status == 200) {
+                    console.log(req.responseText);
+                    setDong(req.responseText);
+                }
+            };
+            req.open('get',url3+qry);
+            req.send();
+        })
+
+          //2. 구군출력
+
+          let setGugun = (guguns) => {
+              let cols = guguns.split(',');
+              //cols.pop();
+
+              while (gugun.lastChild) {
+                  gugun.removeChild(gugun.lastChild)
+              }
+
+              makeopt(gugun,'-시/군/구-');
+              // 시도 option요소 추가
+              for (let col of cols) {
+                  if (col == '') {
+                      continue;
+                  }
+                  makeopt(gugun, col)
+              }
+
+          }
+          //3. 동출력
+          const setDong = (dongs) => {
+              let cols = dongs.split(',');
+
+              //cols.pop();  //배열의 맨끝에 있는 요소를 제거한다
+              // 만약에 배열의 마지막이 공백이 아니었다면 지워졌을것이다
+
+              while (dong.lastChild) {
+                  dong.removeChild(dong.lastChild)
+              }
+
+              makeopt(dong,'-읍/면/동-');
+              // 시도 option요소 추가
+              for (let col of cols) {
+                  if (col == '') {
+                      //cols.pop역할 대신 해준 코드
+                      //pop와 차이점 여긴 지우지 않는 대신 무시하고 넘어갔음
+                      continue;
+                  }
+                  makeopt(dong, col)
+              }
+          };
+
+      //코드 실행 - 실행 진입점(entry point),시작점
+      getsido();
+      </script>
+
+      <p></p>
+      <p></p>
+      <p></p>
+</body>
+</html>
