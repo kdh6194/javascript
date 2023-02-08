@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>부트스트랩5- 폼 다루기</title>
+    <link href ='css/bs5/css/bootstrap.min.css' rel ="stylesheet">
+    <style>
+        .bg{background: ivory; border: 1px solid black}
+        .bg2{background: limegreen; border: 1px solid black}
+    </style></head>
+<body>
+        <h1>부트스트랩5- 폼 다루기</h1>
+        <h2>기본예제</h2>
+        <p>부트스트랩으로 폼을 디자인하려면
+            form-lable, form-control, form-check-label,
+            form-check-input등을 사용하면 됨</p>
+
+        <form>
+            <div class="mb-3">
+                <label for="uid" class="form-label">아이디</label>
+                <input type="text" id="uid" name="uid" class="form-control">
+            </div>
+            <div class="mb-3">
+            <label for="pwd" class="form-label">비밀번호</label>
+            <input type="text" id="pwd" name="pwd" class="form-control">
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" id="islogin" name="islogin" class="form-check-input">
+                <label for="islogin" class="form-check-label">로그인 기억하기</label>
+            </div>
+            <div class="mb-3">
+                <button type="button" class="btn btn-primary">로그인</button>
+                <button type="button" class="btn btn-success">아이디/비밀번호 찾기</button>
+            </div>
+            <div class="mb-3"></div>
+        </form>
+
+        <h2>폼 요소 한줄로 나타내기</h2>
+
+        <form>
+            <div class="row mb-3">
+                <label for="uid2" class="col-sm-1 col-form-label">아이디</label>
+                <div class="col-sm-10">
+                    <input type="text" id="uid2" name="uid2" class="form-control"></div>
+            </div>
+            <div class="row mb-3">
+                <label for="pwd2" class="col-sm-1 col-form-label">비밀번호</label>
+                <div class="col-sm-10">
+                    <input type="text" id="pwd2" name="pwd2" class="form-control"></div>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="islogin2" name="islogin2" class="form-check-input">
+                <label for="islogin2" class="form-check-label">로그인 기억하기</label>
+            </div>
+            <div class="mb-3 ">
+                <button type="button" class="btn btn-primary">로그인</button>
+                <button type="button" class="btn btn-success">아이디/비밀번호 찾기</button>
+            </div>
+            <div class="mb-3"></div>
+        </form>
+        <p>예시2</p>
+        <form class="form-inline">
+            <label class="sr-only" for="inlineFormInputName2">Name</label>
+            <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+
+            <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
+            <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">@</div>
+                </div>
+                <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+            </div>
+
+            <div class="form-check mb-2 mr-sm-2">
+                <input class="form-check-input" type="checkbox" id="inlineFormCheck">
+                <label class="form-check-label" for="inlineFormCheck">
+                    Remember me
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        </form>
+        <p>예시3</p>
+        <form>
+            <div class="form-group">
+                <label for="inputEmail">Email address</label>
+                <input type="email" class="form-control" id="inputEmail">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Password</label>
+                <input type="password" class="form-control" id="inputPassword">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <p>예시4 궁금한 점이 있으면 bootstrap5에 layout을 참고하자</p>
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="Email">
+        </div>
+
+        <h2>select, checkbox, radio</h2>
+
+        <form>
+            <div class="row">
+                <label for="sido" class="form-label col-md-1">시도</label>
+                <div class="col-md-2"> <select class="form-select" id="sido">
+                    <option>-선택하세요-</option>
+                    <option>서울</option>
+                    <option>경기</option>
+                    <option>인천</option>
+                    <option>제주</option>
+                    </select>
+                </div>
+            </div> <!-- // sido select -->
+            <div class="row">
+                <lable for="hobby" class="form-label col-md-1">취미</lable>
+                <div class="col-md-3">
+                    <input type="checkbox" class="form-check-input"
+                           name="hobby" id="hobby" value="soccer">
+                    <lable class="from-check-label">축구</lable>
+                    <input type="checkbox" class="form-check-input"
+                           name="hobby" value="swim">
+                    <lable class="from-check-label">수영</lable>
+                    <input type="checkbox" class="form-check-input"
+                           name="hobby" value="trip">
+                    <lable class="from-check-label">여행</lable>
+                    <input type="checkbox" class="form-check-input"
+                           name="hobby" value="game">
+                    <lable class="from-check-label">게임</lable>
+                </div>
+            </div> <!-- //hobby checkbox -->
+            <div class="row">
+                <label for="gender" class="form-label col-md-1">성별</label>
+                <div class="col-md-2">
+                    <input type="radio" class="form-check-input"
+                           name="gender" id="gender" value="male">
+                    <label class="form-check-label">남자</label>
+                    <input type="radio" class="form-check-input"
+                           name="gender"  value="female">
+                    <label class="form-check-label">여자</label>
+                </div>
+            </div> <!-- //gender radio -->
+
+        </form>
+
+        <h2>Floating label</h2>
+
+        <form>
+            <div class="row form-floating">
+                <input type="text" class="form-control" name="fuid" id="fuid" placeholder="아이디">
+                <label for="fuid">아이디</label>
+            </div>
+            <div class="row form-floating">
+                <input type="text" class="form-control" name="fpwd" id="fpwd" placeholder="비밀번호">
+                <label for="fpwd" >비밀번호</label>
+            </div>
+        </form>
+
+        <p>구글 아이디 입력란을 만드는 코드는 구글링을 해서 정리할것</p>
+
+        <h2>input group</h2>
+
+        <form>
+            <div class="input-group">
+                <input type="text" class="form-control" name="email1">
+                <span class="input-group-text">@</span>
+                <input type="text" class="form-control" name="email2">
+            </div>
+
+            <div class="input-group">
+                <div class="input-group-text">
+                    <input type="checkbox" class="form-check-input">
+                </div>
+                <input type="text" class="form-control">
+            </div>
+
+            <div class="input-group">
+                <div class="input-group-text">
+                    <input type="radio" class="form-check-input">
+                </div>
+                <input type="text" class="form-control">
+            </div>
+        </form>
+
+        <div class="input-group">
+                <input type="file" class="form-control">
+            <button type="button" class="btn btn-outline-secondary">업로드하기</button>
+        </div>
+
+        <h2>폼 유효성 검사</h2>
+        <p>html5에서 기본적으로 제공하느 폼 유효성 검사를
+            novalidate라는 코드로 작동중지해 둠</p>
+        <p>그런 다음 needs-validation라는 클래스 선택자에
+            폼 유효성 검사를 수행하는 함수를 이벤트로 등록해 둠</p>
+
+        <form class="row needs-validation" novalidate>
+            <div class="col-md-4">
+                <label for="ruid" class="form-label">아이디</label>
+                <input type='text' class="form-control" id="ruid" required>
+                <div class="invalid-feedback">
+                    please typing your id
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label for="rpwd" class="form-label">비밀번호</label>
+                <input type='text' class="form-control" id="rpwd" required>
+                <div class="invalid-feedback">
+                    please typing your passward
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="name" class="form-label">이름</label>
+                <input type='text' class="form-control"
+                       name="name" id="name" required>
+                <div class="invalid-feedback">
+                    please typing your name
+                </div>
+            </div>
+            <div class="col-md-12">
+                <input type="checkbox" class="form-check-input" id="checkagree" required>
+                <label for="checkagree" class="form-check-label">이용 약관에 동의합니다</label>
+                <div class="invalid-feedback">
+                    약관에 동의해주세요
+                </div>
+            </div>
+            <div class="col-md-12"><button type="submit" class="btn btn-outline-primary">가입하기</button></div>
+
+        </form>
+
+        <script>
+            // 맞는 형식을 수행했었도 함수를 적용하지 않으면 작동하지 않음
+            // javascript에서 조건을 처리해주기 때문에
+            // 함수 안쓰고 만든다면 프레임워크를 써야만 한다
+            // 함수 정의와 동시에 실행하고 싶다면 (함수정의)(); 작성하면 바로 실행됨
+            // let main = () =>{alert('hello');}; -> main(); 이렇게 작성할 것을
+            // => (()=>{alert('hello');})(); 작성하면 똑같이 작성한다
+            (() => {
+                const forms = document.querySelectorAll('.needs-validation')
+
+                //querySelector는 클래스에서 가져온 값이고
+                //querySelectorAll은 클래스에서 가져온 값을 nodelist로 반환한다
+                //Array는 from(변수명)의 변수명에서 가져온 값을 배열로 만드는함수
+                //forEach은 배열을 순회하는 메서드이다 form은 매겨변수명이니  크게 신경안써도 무방
+                //Array.from(forms).forEach를 빼고 querySeletor로 작성하면 구동이 가능하다
+                //Array.from(forms).forEach 이렇게 작성한 이유는 폼의 여러개였을때를 생각했기때문이다
+                Array.from(forms).forEach(a => {
+                    a.addEventListener('submit', e => {
+                        // console.log(form.checkValidity());
+                        // checkVlidity() 라고 쓰지 않으면
+                        // 바로 화면이 넘어가면서 submit이 된다
+                        if (!a.checkValidity()){
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
+                        a.classList.add('was-validated');
+                    }, false) //addEventListener
+                }) //forEach 배열을 순회하는 메서드
+            })();
+        </script>
+
+            <script src="js/bs5/js/bootstrap.bundle.min.js"></script>
+        <p></p>
+</body>
+</html>
